@@ -1,8 +1,18 @@
+name: Sample API Test Workflow
+
 on:
-  push
+  push:
+
 jobs:
-  build:
+  api-test:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Prints Hello World
-        run: echo "Hello World"
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Newman (Postman CLI alternative)
+        run: npm install -g newman
+
+      - name: Run Sample API Test
+        run: newman run tests/sample-api.postman_collection.json

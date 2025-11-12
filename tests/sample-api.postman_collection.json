@@ -1,0 +1,23 @@
+{
+  "info": {
+    "name": "Sample API Test",
+    "_postman_id": "abcd1234-5678-efgh-ijkl-1234567890ab",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Test GET Request",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://jsonplaceholder.typicode.com/posts/1",
+          "protocol": "https",
+          "host": ["jsonplaceholder", "typicode", "com"],
+          "path": ["posts", "1"]
+        }
+      },
+      "response": []
+    }
+  ]
+}
