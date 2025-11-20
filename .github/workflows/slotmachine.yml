@@ -30,7 +30,7 @@ jobs:
 
       - name: Submit Test Results to Testmo
         env:
-          TESTMO_TOKEN: ${{ secrets.Testmo-CLI }}
+          TESTMO_TOKEN: ${{ secrets.TESTMO_CLI }}
         run: |
           testmo automation:run:submit \
             --instance https://moore.testmo.net \
