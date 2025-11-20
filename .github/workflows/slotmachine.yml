@@ -25,7 +25,7 @@ jobs:
             --reporters junit \
             --reporter-junit-export results/test-results.xml
 
-      - name: Install testmo CLI
+      - name: Install Testmo CLI
         run: npm install -g @testmo/testmo-cli
 
       - name: Submit Test Results to Testmo
