@@ -21,20 +21,20 @@ jobs:
 
       - name: Run API tests
         run: |
-           postman collection run "37502425-390ca486-0b8d-4140-8cb2-afa56232c8af" ,junit --reporter-junit-export results/test-results.xml
+          postman collection run "37502425-390ca486-0b8d-4140-8cb2-afa56232c8af" \
+            --reporter junit \
+            --reporter-junit-export results/test-results.xml
 
       - name: Install testmo CLI
-        run: |
-            npm install -g @testmo/testmo-cli
+        run: npm install -g @testmo/testmo-cli
 
       - name: Submit Test Results to Testmo
+        env:
+          TESTMO_TOKEN: ${{ secrets.Testmo-CLI }}
         run: |
-            testmo automation:run:submit \
+          testmo automation:run:submit \
             --instance https://moore.testmo.net \
             --project-id 5 \
             --name "GitHub Postman API Test Run" \
             --source "postman" \
             --results "results/test-results.xml"
-          
-          
-      
