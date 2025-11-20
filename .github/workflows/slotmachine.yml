@@ -22,7 +22,7 @@ jobs:
       - name: Run API tests
         run: |
           postman collection run "37502425-390ca486-0b8d-4140-8cb2-afa56232c8af" \
-            --reporter junit \
+            --reporters junit \
             --reporter-junit-export results/test-results.xml
 
       - name: Install testmo CLI
