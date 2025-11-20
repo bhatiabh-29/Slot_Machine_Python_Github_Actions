@@ -1,6 +1,9 @@
-name: Automated API tests using Postman CLI
+name: Automated API tests using Postman CLI (Simiocat)
 
-on: push
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   automated-api-tests:
@@ -21,7 +24,7 @@ jobs:
 
       - name: Run API tests
         run: |
-          postman collection run "37502425-390ca486-0b8d-4140-8cb2-afa56232c8af" \
+          postman collection run "37502425-18fb3561-3456-46b2-9bcf-3d98d5cc378a" -e "37502425-35d872f8-0458-4f34-a181-1261acf65b8e" \
             --reporters junit \
             --reporter-junit-export results/test-results.xml
 
@@ -34,7 +37,7 @@ jobs:
         run: |
           testmo automation:run:submit \
             --instance https://moore.testmo.net \
-            --project-id 5 \
+            --project-id 2 \
             --name "GitHub Postman API Test Run" \
             --source "postman" \
             --results "results/test-results.xml"
