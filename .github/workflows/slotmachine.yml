@@ -23,14 +23,14 @@ jobs:
         run: mkdir -p results
 
       - name: Run API tests (Allow Failure)
-        id: Postman
+        id: postman
+        continue-on-error: true
         run: |
           postman collection run "37502425-18fb3561-3456-46b2-9bcf-3d98d5cc378a" -e "37502425-35d872f8-0458-4f34-a181-1261acf65b8e" \
             --reporters junit \
-            --reporter-junit-export results/test-results.xml
-              
+            --reporter-junit-export results/test-results.xml    
           echo "exitcode=$?" >> $GITHUB_OUTPUT
-        continue-on-error: true
+        
 
       - name: Install Testmo CLI
         run: npm install -g @testmo/testmo-cli
@@ -47,5 +47,5 @@ jobs:
             --results "results/test-results.xml"
 
       - name: Fail workflow if the APi tests failed
-        if: ${{steps.Postman.outputs.exitcode !=0}}
+        if: ${{ steps.postman.outputs.exitcode != 0 }}
         run: exit 1
