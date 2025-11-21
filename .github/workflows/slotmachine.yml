@@ -3,7 +3,7 @@ name: UAT Automated API tests using Postman CLI (Simiocat)
 on:
   push:
     branches:
-      - main
+      - main # -- manual
 
 jobs:
   automated-api-tests:
@@ -29,6 +29,8 @@ jobs:
           postman collection run "37502425-18fb3561-3456-46b2-9bcf-3d98d5cc378a" -e "37502425-35d872f8-0458-4f34-a181-1261acf65b8e" \
             --reporters junit \
             --reporter-junit-export results/test-results.xml    
+          
+          
           echo "exitcode=$?" >> $GITHUB_OUTPUT
         
 
@@ -46,6 +48,9 @@ jobs:
             --source "postman" \
             --results "results/test-results.xml"
 
-      - name: Fail workflow if the APi tests failed
+      - name: Fail workflow if the API tests failed
         if: ${{ steps.postman.outputs.exitcode != 0 }}
-        run: exit 1
+        run: |
+          echo "API tests failed with exit code ${{ steps.postman.outputs.exitcode }}"
+          exit 1
+      
