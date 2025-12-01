@@ -32,6 +32,9 @@ jobs:
           
           
           echo "exitcode=$?" >> $GITHUB_OUTPUT
+      - name: Debug exit code
+        run:  |
+          echo "Postman exit code: ${{ steps.postman.outputs.exitcode }}"
         
 
       - name: Install Testmo CLI
