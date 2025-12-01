@@ -32,6 +32,8 @@ jobs:
             --reporter-junit-export results/test-results.xml
           
           echo "exitcode=$?" >> $GITHUB_OUTPUT
+        outputs:
+          exitcode: ${{ steps.postman.outputs.exitcode }}
 
       - name: Debug exit code
         run: |
