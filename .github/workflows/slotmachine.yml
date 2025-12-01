@@ -26,11 +26,22 @@ jobs:
         id: postman
         continue-on-error: true
         run: |
-          postman collection run "37502425-390ca486-0b8d-4140-8cb2-afa56232c8af" -e "37502425-206617b0-27d0-463d-84af-f786f71e095b" \
+          set +e  #llow errors without stopping the step
+          
+          postman collection run "37502425-390ca486-0b8d-4140-8cb2-afa56232c8af" \
+            -e "37502425-206617b0-27d0-463d-84af-f786f71e095b" \
             --reporters junit \
             --reporter-junit-export results/test-results.xml
           
-          echo "exitcode=$?" >> $GITHUB_OUTPUT
+          # capture the exit code in a variable
+          EXIT_CODE=$?
+          
+          # always write it to GitHub output
+          echo "exitcode=$EXIT_CODE" >> $GITHUB_OUTPUT
+          
+          # optional: debug print
+          echo "Captured Postman exit code: $EXIT_CODE"
+      
       
 
       - name: Debug exit code
