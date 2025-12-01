@@ -26,16 +26,16 @@ jobs:
         id: postman
         continue-on-error: true
         run: |
-           postman collection run "37502425-18fb3561-3456-46b2-9bcf-3d98d5cc378a" -e "37502425-206617b0-27d0-463d-84af-f786f71e095b" \
+          postman collection run "37502425-18fb3561-3456-46b2-9bcf-3d98d5cc378a" \
+            -e "37502425-206617b0-27d0-463d-84af-f786f71e095b" \
             --reporters junit \
             --reporter-junit-export results/test-results.xml
-
+          
           echo "exitcode=$?" >> $GITHUB_OUTPUT
 
       - name: Debug exit code
-        run:  |
+        run: |
           echo "Postman exit code: ${{ steps.postman.outputs.exitcode }}"
-        
 
       - name: Install Testmo CLI
         run: npm install -g @testmo/testmo-cli
